@@ -44,4 +44,3 @@ services:
 databases:
   - name: algomentor-ai-postgres
     plan: free
-    diskSizeGB: 1
