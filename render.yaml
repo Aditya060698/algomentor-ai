@@ -11,10 +11,18 @@ services:
         value: 10000
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-      - key: DB_URL
+      - key: DB_HOST
         fromDatabase:
           name: algomentor-ai-postgres
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: algomentor-ai-postgres
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: algomentor-ai-postgres
+          property: database
       - key: DB_USERNAME
         fromDatabase:
           name: algomentor-ai-postgres

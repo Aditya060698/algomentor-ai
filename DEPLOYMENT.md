@@ -14,7 +14,7 @@ This repository includes `render.yaml` so Render can provision the stack from co
 This repository is configured for a free Render deployment:
 - backend web service on the `free` plan
 - frontend static site on Render's free static hosting
-- PostgreSQL database on the `free` plan with `1 GB` storage
+- PostgreSQL database on the `free` plan
 
 Important limitations from Render's official docs checked on April 18, 2026:
 - free web services spin down after 15 minutes of inactivity
@@ -26,12 +26,16 @@ Important limitations from Render's official docs checked on April 18, 2026:
 The backend uses `backend/Dockerfile`.
 
 Important environment variables:
-- `PORT`: Render injects the port your container must bind to
+- `PORT`
 - `SPRING_PROFILES_ACTIVE=prod`
-- `DB_URL`
+- `DB_HOST`
+- `DB_PORT`
+- `DB_NAME`
 - `DB_USERNAME`
 - `DB_PASSWORD`
-- `APP_CORS_ALLOWED_ORIGINS`: frontend origin allowed by the backend
+- `APP_CORS_ALLOWED_ORIGINS`
+
+The backend builds its JDBC URL from those values.
 
 Health check:
 - `/api/v1/health`
@@ -59,7 +63,7 @@ The `render.yaml` rewrite rule sends all routes to `index.html`, which is requir
 
 - Frontend calls `VITE_API_BASE_URL`
 - Backend accepts requests from `APP_CORS_ALLOWED_ORIGINS`
-- Backend connects to PostgreSQL using Render database credentials
+- Backend connects to PostgreSQL using Render-injected host, port, database, user, and password
 
 ## Production Notes
 
