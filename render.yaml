@@ -3,7 +3,7 @@ services:
     name: algomentor-ai-backend
     runtime: docker
     rootDir: backend
-    plan: starter
+    plan: free
     autoDeploy: true
     healthCheckPath: /api/v1/health
     envVars:
@@ -43,4 +43,5 @@ services:
 
 databases:
   - name: algomentor-ai-postgres
-    plan: starter
+    plan: free
+    diskSizeGB: 1

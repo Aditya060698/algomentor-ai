@@ -9,6 +9,18 @@ Use two Render services and one managed database:
 
 This repository includes `render.yaml` so Render can provision the stack from code.
 
+## Free Deploy Setup
+
+This repository is configured for a free Render deployment:
+- backend web service on the `free` plan
+- frontend static site on Render's free static hosting
+- PostgreSQL database on the `free` plan with `1 GB` storage
+
+Important limitations from Render's official docs checked on April 18, 2026:
+- free web services spin down after 15 minutes of inactivity
+- free Postgres expires 30 days after creation unless upgraded
+- free services are not appropriate for real production traffic
+
 ## Backend Service
 
 The backend uses `backend/Dockerfile`.
@@ -51,9 +63,12 @@ The `render.yaml` rewrite rule sends all routes to `index.html`, which is requir
 
 ## Production Notes
 
-Before real production traffic, add:
+This free setup is good for demos, portfolio review, and interview walkthroughs.
+
+Before calling it production-ready, add:
 - Flyway or Liquibase migrations instead of `ddl-auto`
 - Redis for caching and rate-limit support
 - secrets management for AI provider keys
 - request logging and metrics
 - separate staging and production environments
+- a paid database or external managed database with backups and no expiry
